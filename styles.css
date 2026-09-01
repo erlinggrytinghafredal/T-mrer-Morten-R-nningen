@@ -157,9 +157,10 @@ h1, h2, h3 {
 
 .hero h1 {
   font-size: clamp(2.6rem, 6vw, 4.6rem);
-  line-height: 0.98;
+  line-height: 1.18;
   color: var(--ink);
   margin-bottom: 26px;
+  word-wrap: break-word;
 }
 
 .hero-lede {
@@ -200,36 +201,51 @@ h1, h2, h3 {
   .hero-mark { width: 46%; margin: 0 auto; opacity: 0.5; }
 }
 
-/* ---------- marquee divider ---------- */
+/* ---------- service band (static) ---------- */
 
-.marquee {
+.service-band {
   background: var(--ink);
   color: var(--paper);
-  overflow: hidden;
-  white-space: nowrap;
   border-top: 3px solid var(--ink);
   border-bottom: 3px solid var(--ink);
 }
 
-.marquee-track {
-  display: inline-flex;
-  animation: scroll-left 26s linear infinite;
+.service-band-track {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 18px 28px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  text-align: center;
 }
 
-.marquee span {
+.service-band-track span {
   font-family: var(--font-display);
-  font-size: 20px;
+  font-size: 19px;
   letter-spacing: 0.02em;
-  padding: 14px 0;
+  text-transform: uppercase;
+  position: relative;
 }
 
-@keyframes scroll-left {
-  from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+.service-band-track span:not(:first-child)::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 22px;
+  background: #4a4438;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  .marquee-track { animation: none; }
+@media (max-width: 680px) {
+  .service-band-track {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 14px;
+  }
+  .service-band-track span:nth-child(3)::before {
+    display: none;
+  }
 }
 
 /* ---------- section heading ---------- */
